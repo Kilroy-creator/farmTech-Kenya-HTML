@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FarmTech - Knowledge Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🌱 FarmTech</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="crops.html">Crops</a></li>
+      <li><a href="livestock.html">Livestock</a></li>
+      <li><a href="finance.html">Finance</a></li>
+      <li><a href="market.html">Market</a></li>
+      <li><a href="knowledge.html" class="active">Knowledge</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Knowledge Hub 📘</h2>
+
+    <!-- Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="research">Research & Innovations</button>
+      <button class="tab-btn" data-tab="weather">Weather Updates</button>
+      <button class="tab-btn" data-tab="community">Community Forums</button>
+    </div>
+
+    <!-- Research -->
+    <div id="research" class="tab-content active">
+      <h3>Research & Innovations</h3>
+      <div id="articles"></div>
+    </div>
+
+    <!-- Weather -->
+    <div id="weather" class="tab-content">
+      <h3>Weather Forecast 🌦️</h3>
+      <form id="weatherForm">
+        <input type="text" id="city" placeholder="Enter your location..." required>
+        <button type="submit">Get Weather</button>
+      </form>
+      <div id="weatherInfo" class="card"></div>
+    </div>
+
+    <!-- Community -->
+<div id="community" class="tab-content">
+  <h3>Community Forums 💬</h3>
+  <form id="forumForm">
+    <select id="category" required>
+      <option value="" disabled selected>Choose a category</option>
+      <option value="Crops">🌱 Crops</option>
+      <option value="Livestock">🐄 Livestock</option>
+      <option value="Finance">💰 Finance</option>
+      <option value="Weather">🌦️ Weather</option>
+      <option value="Market">🛒 Market</option>
+      <option value="General">💬 General</option>
+    </select>
+    <input type="text" id="questionTitle" placeholder="Ask a question..." required>
+    <textarea id="questionBody" placeholder="Details (optional)"></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <!-- Filter posts -->
+  <div class="filter">
+    <label for="filterCategory">Filter by category: </label>
+    <select id="filterCategory">
+      <option value="All">All</option>
+      <option value="Crops">🌱 Crops</option>
+      <option value="Livestock">🐄 Livestock</option>
+      <option value="Finance">💰 Finance</option>
+      <option value="Weather">🌦️ Weather</option>
+      <option value="Market">🛒 Market</option>
+      <option value="General">💬 General</option>
+    </select>
+  </div>
+
+  <div id="forumPosts"></div>
+</div>
+
+
+  <script src="js/knowledge.js"></script>
+</body>
+</html>

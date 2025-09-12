@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "name": "Maize",
+    "planted_on": "2025-03-10",
+    "expected_harvest": "2025-08-20",
+    "area_acres": 2,
+    "status": "Growing"
+  },
+  {
+    "id": 2,
+    "name": "Beans",
+    "planted_on": "2025-04-05",
+    "expected_harvest": "2025-07-15",
+    "area_acres": 1,
+    "status": "Harvested"
+  },
+  {
+    "id": 3,
+    "name": "Wheat",
+    "planted_on": "2025-02-20",
+    "expected_harvest": "2025-06-30",
+    "area_acres": 3,
+    "status": "Growing"
+  },  {
+    "id": 4,
+    "name": "Tomatoes",
+    "planted_on": "2025-05-01",
+    "expected_harvest": "2025-07-30",
+    "area_acres": 0.5,
+    "status": "Growing"
+  },
+  {
+    "id": 5,
+    "name": "Cabbage",
+    "planted_on": "2025-04-15",
+    "expected_harvest": "2025-06-25",
+    "area_acres": 0.75,
+    "status": "Harvested"
+  },  {
+    "id": 6,
+    "name": "Carrots",
+    "planted_on": "2025-03-25",
+    "expected_harvest": "2025-06-05",
+    "area_acres": 1,
+    "status": "Growing"
+  },  {
+    "id": 7,
+    "name": "Onions",
+    "planted_on": "2025-04-10",
+    "expected_harvest": "2025-07-20",
+    "area_acres": 1.5,
+    "status": "Growing"
+  },  {
+    "id": 8,
+    "name": "Spinach",
+    "planted_on": "2025-05-05",
+    "expected_harvest": "2025-06-15",
+    "area_acres": 0.3,
+    "status": "Growing"
+  },  {
+    "id": 9,
+    "name": "Potatoes",
+    "planted_on": "2025-03-15",
+    "expected_harvest": "2025-07-01",
+    "area_acres": 2.5,
+    "status": "Growing"
+  },  {
+    "id": 10,
+    "name": "Cucumbers",
+    "planted_on": "2025-04-20",
+    "expected_harvest": "2025-07-10",
+    "area_acres": 0.4,
+    "status": "Growing"
+  },  {
+    "id": 11,
+    "name": "Peas",
+    "planted_on": "2025-05-10",
+    "expected_harvest": "2025-07-25",
+    "area_acres": 0.6,
+    "status": "Growing"
+  },  {
+    "id": 12,
+    "name": "Sunflowers",
+    "planted_on": "2025-03-30",
+    "expected_harvest": "2025-08-05",
+    "area_acres": 1.2,
+    "status": "Growing"
+  },  {
+    "id": 13,
+    "name": "Sorghum",
+    "planted_on": "2025-04-25",
+    "expected_harvest": "2025-09-10",
+    "area_acres": 2,
+    "status": "Growing"
+  },  {
+    "id": 14,
+    "name": "Millet",
+    "planted_on": "2025-05-15",
+    "expected_harvest": "2025-09-20",
+    "area_acres": 1.8,
+    "status": "Growing"
+  },  {
+    "id": 15,
+    "name": "Sweet Potatoes",
+    "planted_on": "2025-03-05",
+    "expected_harvest": "2025-06-15",
+    "area_acres": 1,
+    "status": "Growing"
+  },  {
+    "id": 16,
+    "name": "Cucumbers",
+    "planted_on": "2025-04-20",
+    "expected_harvest": "2025-07-10",
+    "area_acres": 0.4,
+    "status": "Growing"
+  }
+]

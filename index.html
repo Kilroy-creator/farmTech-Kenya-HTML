@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmTech Kenya</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🌱 FarmTech Kenya</div>
+      <ul class="nav-links">
+      <li><a href="knowledge.html">Knowledge</a></li>
+        <li><a href="profile.html">Profile</a></li>
+    </nav>
+  </header>
+
+  <!-- DASHBOARD MAIN -->
+  <main class="dashboard-bg">
+
+    <!-- Welcome Section -->
+    <section class="welcome fade-in">
+      <h1 id="welcomeMessage">👋 Welcome, Farmer!</h1>
+      <p>Here’s your farm overview at a glance.</p>
+    </section>
+
+    <!-- Quick Stats Cards -->
+    <section class="stats card-grid">
+      <div class="card zoom-in">
+        <h2>🌾 Crops</h2>
+        <p>Manage your fields and yields.</p>
+        <a href="crops.html">Go to Crops →</a>
+      </div>
+      <div class="card zoom-in">
+        <h2>🐄 Livestock</h2>
+        <p>Track animals and veterinary care.</p>
+        <a href="livestock.html">Go to Livestock →</a>
+      </div>
+      <div class="card zoom-in">
+        <h2>💰 Finance</h2>
+        <p>Check expenses and loans.</p>
+        <a href="finance.html">Go to Finance →</a>
+      </div>
+      <div class="card zoom-in">
+        <h2>🛒 Market</h2>
+        <p>Sell produce & buy inputs.</p>
+        <a href="market.html">Go to Market →</a>
+      </div>
+    </section>
+
+    <!-- Weather -->
+    <section class="weather fade-in">
+      <h2>☀️ Weather Forecast</h2>
+      <div class="weather-box">
+        <p><strong>Today:</strong> Sunny, 28°C</p>
+        <p><strong>Tomorrow:</strong> Light Rain, 23°C</p>
+      </div>
+    </section>
+
+    <!-- Chat -->
+    <section class="chat fade-in">
+      <h2>💬 Farmer Feedback & Chat</h2>
+      <div class="chat-box" id="chatBox">
+        <p><em>Farmer John:</em> My maize is growing well after using new fertilizer!</p>
+        <p><em>Farmer Amina:</em> Expect rains next week, prepare your fields.</p>
+      </div>
+      <form id="chatForm">
+        <input type="text" id="chatInput" placeholder="Type your message..." required>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FarmTech Kenya</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

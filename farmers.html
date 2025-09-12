@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Profile | FarmTech Kenya</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">🌱 FarmTech</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a href="livestock.html">Livestock</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a href="knowledge.html">Knowledge</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+    <h1>🌱 Farmer Profile</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Enter Farmer Details</h2>
+      <form id="farmerForm">
+        <label>Name: <input type="text" id="farmerName" required></label><br><br>
+        <label>Contact: <input type="text" id="farmerContact" required></label><br><br>
+        <label>Total Acres of Land: <input type="number" id="farmerAcres" required></label><br><br>
+        <label>Location: <input type="text" id="farmerLocation" required></label><br><br>
+        <button type="submit">Save Profile</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Saved Profile</h2>
+      <div id="profileDisplay">
+        <p>No farmer profile saved yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/farmers.js"></script>
+</body>
+</html>

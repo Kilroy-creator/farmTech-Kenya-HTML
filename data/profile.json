@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "John Mwangi",
+    "location": "Nakuru",
+    "farm_size": "5 acres",
+    "main_crops": ["Maize", "Beans"],
+    "main_livestock": ["Cows", "Goats"],
+    "language": "English",
+    "notifications": true
+  }
+]

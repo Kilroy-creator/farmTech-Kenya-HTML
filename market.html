@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FarmTech - Market</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🌱 FarmTech</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="crops.html">Crops</a></li>
+      <li><a href="livestock.html">Livestock</a></li>
+      <li><a href="finance.html">Finance</a></li>
+      <li><a href="market.html" class="active">Market</a></li>
+      <li><a href="knowledge.html">Knowledge</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Farmers Market</h2>
+    <h3>🛍️ Your Cart</h3>
+<ul id="cartList"></ul>
+<button id="checkoutBtn">✅ Checkout</button>
+
+<h3>📖 Order History</h3>
+<div id="orderHistory"></div>
+
+
+    <div class="form-section">
+      <h3>Sell Your Product</h3>
+      <form id="sellForm">
+        <input type="text" id="productName" placeholder="Product Name" required>
+        <input type="number" id="productPrice" placeholder="Price (KES)" required>
+        <input type="number" id="productQty" placeholder="Quantity" required>
+        <input type="text" id="productCategory" placeholder="Category (e.g. Grain, Seed)" required>
+        <input type="text" id="productImage" placeholder="Image URL (optional)">
+        <button type="submit">Add Product</button>
+      </form>
+    </div>
+    <div class ="form-section">
+      <h3>Buy Inputs</h3>
+      <form id="buyForm">
+        <input type="text" id="searchQuery" placeholder="Search products..." required>
+        <input type="number" id="maxPrice" placeholder="Max Price (KES)">
+        <input type="number" id="minQty" placeholder="Min Quantity">
+        <input type="text" id="categoryFilter" placeholder="Category (e.g. Grain, Seed)">
+        <input type="text" id="productImage" placeholder="Image URL (optional)">
+        
+        
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <h3>Available Products</h3>
+    <div id="productGrid" class="grid"></div>
+
+    <h3>🛍️ Your Cart</h3>
+    <ul id="cartList"></ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/market.js"></script>
+</body>
+</html>

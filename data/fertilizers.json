@@ -1,0 +1,14 @@
+[
+  { "id": 1, "crop": "Maize", "fertilizer": "DAP", "advice": "Apply 50kg per acre at planting." },
+  { "id": 2, "crop": "Beans", "fertilizer": "NPK", "advice": "Use 20kg per acre before flowering." },
+  { "id": 3, "crop": "Wheat", "fertilizer": "Urea", "advice": "Top dress after 30 days of growth." },
+    { "id": 4, "crop": "Tomatoes", "fertilizer": "Compost", "advice": "Incorporate well-rotted compost before planting." },
+    { "id": 5, "crop": "Cabbage", "fertilizer": "Calcium Nitrate", "advice": "Apply 10kg per acre every two weeks." },
+    { "id": 6, "crop": "Carrots", "fertilizer": "Potassium Sulfate", "advice": "Use 15kg per acre at planting." },
+    { "id": 7, "crop": "Onions", "fertilizer": "Ammonium Sulfate", "advice": "Apply 20kg per acre in split doses." },
+    { "id": 8, "crop": "Spinach", "fertilizer": "Fish Emulsion", "advice": "Dilute and apply every week for best results." },
+    { "id": 9, "crop": "Potatoes", "fertilizer": "Muriate of Potash", "advice": "Apply 30kg per acre at planting." },
+    { "id": 10, "crop": "Sweet Potatoes", "fertilizer": "Bone Meal", "advice": "Incorporate into soil before planting." },
+    { "id": 11, "crop": "Cucumbers", "fertilizer": "Seaweed Extract", "advice": "Use as a foliar spray every two weeks." },
+    { "id": 12, "crop": "Peas", "fertilizer": "Lime", "advice": "Apply 1 ton per acre to adjust soil pH." }
+]

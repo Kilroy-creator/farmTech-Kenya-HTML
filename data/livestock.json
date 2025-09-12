@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "type": "Cow",
+    "count": 5,
+    "milk_per_day": 12,
+    "vaccinations": [
+      { "name": "FMD", "date": "2025-01-12" },
+      { "name": "Lumpy Skin", "date": "2025-05-05" }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "Goat",
+    "count": 10,
+    "milk_per_day": 2,
+    "vaccinations": [
+      { "name": "PPR", "date": "2025-03-20" }
+    ]
+ },  {
+    "id": 3,
+    "type": "Sheep",
+    "count": 8,
+    "milk_per_day": 1,
+    "vaccinations": [
+      { "name": "Sheep Pox", "date": "2025-04-15" }
+    ]
+  }, {
+    "id": 4,
+    "type": "Chicken",
+    "count": 20,
+    "eggs_per_day": 15,
+    "vaccinations": [
+      { "name": "Newcastle Disease", "date": "2025-02-10" }
+    ]
+  }, {
+    "id": 5,
+    "type": "Pig",
+    "count": 4,
+    "weight_kg": 50,
+    "vaccinations": [
+      { "name": "Swine Fever", "date": "2025-06-01" }
+    ]
+  }, {
+    "id": 6,
+    "type": "Rabbit",
+    "count": 12,
+    "weight_kg": 3,
+    "vaccinations": [
+      { "name": "Myxomatosis", "date": "2025-05-15" }
+    ]
+  }
+
+]
+

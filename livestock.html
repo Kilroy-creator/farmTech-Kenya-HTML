@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livestock | FarmTech Kenya</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar">
+      <div class="logo">🌱 FarmTech</div>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a href="livestock.html" class="active">Livestock</a></li>
+        <li><a href="finance.html">Finance</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a href="knowledge.html">Knowledge</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul></nav>
+      <h1>🐄 Livestock Management</h1>
+      
+  </header>
+
+  <main>
+    <section>
+      <h2>Add Livestock</h2>
+      <form id="livestockForm">
+        <label>Animal Type:
+          <select id="animalType" required>
+            <option value="">-- Select --</option>
+            <option value="Cow">🐄 Cow</option>
+            <option value="Goat">🐐 Goat</option>
+            <option value="Chicken">🐓 Chicken</option>
+            <option value="Sheep">🐑 Sheep</option>
+            <option value="Pig">🐖 Pig</option>
+            <option value="Other">Other</option>
+          </select>
+        </label><br><br>
+
+        <label>Breed: <input type="text" id="animalBreed" required></label><br><br>
+        <label>Number: <input type="number" id="animalCount" required></label><br><br>
+        <label>Average Age (months): <input type="number" id="animalAge" required></label><br><br>
+
+        <label>Production Type:
+          <select id="productionType" required>
+            <option value="">-- Select --</option>
+            <option value="Milk">🥛 Milk</option>
+            <option value="Eggs">🥚 Eggs</option>
+            <option value="Meat">🍖 Meat</option>
+            <option value="None">None</option>
+          </select>
+        </label><br><br>
+
+        <label>Production per Day (liters/eggs/kg): 
+          <input type="number" id="dailyProduction">
+        </label><br><br>
+
+        <button type="submit">Save Livestock</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Saved Livestock</h2>
+      <div id="livestockList">
+        <p>No livestock added yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/livestock.js"></script>
+</body>
+</html>

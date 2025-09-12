@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crops Management | FarmTech Kenya</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🌱 FarmTech Kenya</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li class="dropdown">
+          <a href="#">Crops ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="crops.html">Crop Management</a></li>
+            <li><a href="crop-diseases.html">Diseases & Treatment</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Livestock ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="livestock.html">Animal Management</a></li>
+            <li><a href="vet.html">Veterinary Support</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Knowledge Hub ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="knowledge.html">Research & Innovations</a></li>
+            <li><a href="knowledge.html">Community Forums</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Finance ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="finance.html">Farm Expenses</a></li>
+            <li><a href="microfinance.html">Microfinance & Loans</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Market ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="market.html">Sell Products</a></li>
+            <li><a href="market.html">Buy Inputs</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Profile ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="profile.html">View Profile</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="#" onclick="logoutFarmer()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CROPS SECTION -->
+  <main class="page-bg">
+    <section class="fade-in">
+      <h1>🌾 Crops Management</h1>
+      <p>Track your fields, planting, and harvest schedules.</p>
+    </section>
+
+    <!-- Crop Form -->
+    <section class="form-section">
+      <h2>Add New Crop</h2>
+      <form id="cropForm">
+        <input type="text" id="cropName" placeholder="Crop Name" required>
+        <input type="date" id="plantDate" required>
+        <input type="date" id="harvestDate" required>
+        <input type="number" id="expectedYield" placeholder="Expected Yield (kg)" required>
+        <button type="submit">Add Crop</button>
+      </form>
+    </section>
+
+    <!-- Crop List -->
+    <section class="list-section">
+      <h2>Your Crops</h2>
+      <div id="cropList" class="crop-cards"></div>
+    </section>
+
+    <!-- Harvest Chart -->
+    <section class="chart-section">
+      <h2>📊 Harvest Timeline</h2>
+      <canvas id="harvestChart"></canvas>
+    </section>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/crops.js"></script>
+</body>
+</html>

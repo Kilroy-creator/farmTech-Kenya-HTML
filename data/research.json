@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Improving Maize Yields in Semi-Arid Areas",
+    "summary": "Research on drought-resistant maize varieties and soil moisture conservation.",
+    "link": "https://example.com/maize-research"
+  },
+  {
+    "id": 2,
+    "title": "Organic Pest Control for Vegetables",
+    "summary": "Using neem extracts and natural solutions for pest management.",
+    "link": "https://example.com/organic-pests"
+  },
+  {
+    "id": 3,
+    "title": "Sustainable Livestock Farming Practices",
+    "summary": "Techniques to improve animal health and productivity sustainably.",
+    "link": "https://example.com/livestock-farming"
+  },{
+    "id": 4,
+    "title": "Soil Health Improvement Methods",
+    "summary": "Research on cover cropping and crop rotation to enhance soil fertility.",
+    "link": "https://example.com/soil-health"
+  }
+
+]

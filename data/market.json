@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Fresh Maize", "price": 1200, "qty": "90kg bag", "seller": "John Mwangi" },
+  { "id": 2, "name": "Beans", "price": 900, "qty": "50kg bag", "seller": "Mary Achieng" },
+  { "id": 3, "name": "Cattle Feed", "price": 1500, "qty": "25kg bag", "seller": "AgroVet Supplies" },
+  { "id": 4, "name": "Fertilizer (DAP)", "price": 2000, "qty": "50kg bag", "seller": "Farm Supplies Ltd" },
+    { "id": 5, "name": "Pesticides", "price": 800, "qty": "1 liter", "seller": "Agro Chemicals Co." },
+    { "id": 6, "name": "Fresh Milk", "price": 60, "qty": "1 liter", "seller": "Dairy Farm Ltd" },
+    { "id": 7, "name": "Eggs", "price": 150, "qty": "1 dozen", "seller": "Poultry Farm Ltd" },
+    { "id": 8, "name": "Fresh Tomatoes", "price": 100, "qty": "1 kg", "seller": "Green Valley Farms" },
+    { "id": 9, "name": "Onions", "price": 80, "qty": "1 kg", "seller": "Farm Fresh Produce" },
+    { "id": 10, "name": "Carrots", "price": 90, "qty": "1 kg", "seller": "Healthy Harvest Farms" }
+]

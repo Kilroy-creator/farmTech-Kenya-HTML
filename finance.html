@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🌱 FarmTech</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a href="livestock.html">Livestock</a></li>
+        <li><a href="finance.html" class="active">Finance</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a href="knowledge.html">Knowledge</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" style="background: url('images/finance-bg.jpg') center/cover;">
+    <div class="hero-text">
+      <h1>💰 Finance Management</h1>
+      <p>Track expenses, income, loans & profits</p>
+    </div>
+  </section>
+
+  <!-- Finance Summary -->
+  <section class="summary">
+    <h2>📊 Finance Summary</h2>
+    <div class="summary-cards">
+      <div class="card"><h3>Total Income</h3><p id="totalIncome">KSh 0</p></div>
+      <div class="card"><h3>Total Expenses</h3><p id="totalExpenses">KSh 0</p></div>
+      <div class="card"><h3>Profit</h3><p id="profit">KSh 0</p></div>
+      <div class="card"><h3>Loan Balance</h3><p id="loanBalance">KSh 0</p></div>
+    </div>
+  </section>
+
+  <!-- Add Expense -->
+  <section class="form-section">
+    <h2>➖ Record Expense</h2>
+    <form id="expenseForm">
+      <label>Date:</label><input type="date" id="expenseDate" required>
+      <label>Item:</label><input type="text" id="expenseItem" required>
+      <label>Category:</label>
+      <select id="expenseCategory">
+        <option>Seeds</option><option>Fertilizer</option>
+        <option>Vet Services</option><option>Feed</option>
+        <option>Other</option>
+      </select>
+      <label>Cost (KSh):</label><input type="number" id="expenseCost" required>
+      <button type="submit">Add Expense</button>
+    </form>
+  </section>
+
+  <!-- Add Income -->
+  <section class="form-section">
+    <h2>➕ Record Income</h2>
+    <form id="incomeForm">
+      <label>Date:</label><input type="date" id="incomeDate" required>
+      <label>Source:</label>
+      <select id="incomeSource">
+        <option>Crops</option><option>Livestock</option><option>Other</option>
+      </select>
+      <label>Amount (KSh):</label><input type="number" id="incomeAmount" required>
+      <button type="submit">Add Income</button>
+    </form>
+  </section>
+
+  <!-- Loan Tracking -->
+  <section class="form-section">
+    <h2>💳 Microfinance & Loans</h2>
+    <form id="loanForm">
+      <label>Lender:</label><input type="text" id="loanLender" required>
+      <label>Amount Borrowed (KSh):</label><input type="number" id="loanAmount" required>
+      <label>Repayment Date:</label><input type="date" id="loanDue" required>
+      <button type="submit">Add Loan</button>
+    </form>
+  </section>
+
+  <!-- Transaction History -->
+  <section class="card-section">
+    <h2>📜 Transaction History</h2>
+    <div id="transactionList" class="card-grid"></div>
+  </section>
+
+  <!-- Chart -->
+  <section class="chart-section">
+    <h2>📈 Income vs Expenses</h2>
+    <canvas id="financeChart" width="400" height="200"></canvas>
+  </section>
+
+  <script src="js/finance.js"></script>
+</body>
+</html>
