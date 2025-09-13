@@ -166,6 +166,24 @@ vaccineForm.addEventListener("submit", (e) => {
   renderAnimals();
   vaccineForm.reset();
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("livestockChart");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Cows", "Goats", "Sheep"],
+        datasets: [{
+          label: "Animals",
+          data: [5, 10, 8],
+          backgroundColor: ["#4CAF50", "#FF9800", "#2196F3"]
+        }]
+      }
+    });
+  }
+});
 
 // Initial render
 renderAnimals();

@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FarmTech Kenya</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <style>
+    /* Ensure weather map is visible */
+    #weatherMap {
+      width: 100%;
+      height: 300px;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
 
@@ -13,8 +29,9 @@
     <nav class="navbar">
       <div class="logo">🌱 FarmTech Kenya</div>
       <ul class="nav-links">
-      <li><a href="knowledge.html">Knowledge</a></li>
+        <li><a href="knowledge.html">Knowledge</a></li>
         <li><a href="profile.html">Profile</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -24,7 +41,7 @@
     <!-- Welcome Section -->
     <section class="welcome fade-in">
       <h1 id="welcomeMessage">👋 Welcome, Farmer!</h1>
-      <p>Here’s your farm overview at a glance.</p>
+      <p>Here’s your e-farm overview at a glance.</p>
     </section>
 
     <!-- Quick Stats Cards -->
@@ -52,13 +69,21 @@
     </section>
 
     <!-- Weather -->
-    <section class="weather fade-in">
-      <h2>☀️ Weather Forecast</h2>
-      <div class="weather-box">
-        <p><strong>Today:</strong> Sunny, 28°C</p>
-        <p><strong>Tomorrow:</strong> Light Rain, 23°C</p>
-      </div>
-    </section>
+<section class="weather fade-in">
+  <div class="card fade-in">
+    <h2>☀️ Weather Forecast</h2>
+    <h3>🌦 Current Weather</h3>
+    <div id="weatherInfo">⏳ Detecting your location...</div>
+
+    <h4 style="margin-top:15px;">
+      <button id="forecastBtn">📅 Show 5-Day Forecast</button>
+    </h4>
+
+    <!-- Hidden by default -->
+    <div id="forecast" style="display:none;">⏳ Loading forecast...</div>
+  </div>
+</section>
+
 
     <!-- Chat -->
     <section class="chat fade-in">
@@ -78,7 +103,11 @@
     <p>&copy; 2025 FarmTech Kenya</p>
   </footer>
 
+  <!-- Scripts: Order is important -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/weather.js"></script> <!-- ✅ moved into js/ folder -->
   <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/knowledge.js"></script>
 </body>
 </html>

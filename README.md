@@ -1,5 +1,4 @@
 # farm-Tech
-# farm-Tech
 FarmTech Kenya
 
 Goal: Build a smart, AI-powered platform to help Kenyan farmers manage crops, livestock, assets, finances, and access farming knowledge/resources.

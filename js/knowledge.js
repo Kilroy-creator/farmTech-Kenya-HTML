@@ -122,21 +122,167 @@ document.getElementById("filterCategory").addEventListener("change", (e) => {
 // Initial render
 renderPosts();
 
-// -------- Weather Smart Advice --------
-function getFarmingAdvice(temp, condition, humidity) {
+// ==== Real-time Weather + 7-Day Forecast + Crop-Specific Advice ====
+
+// Replace with your OpenWeatherMap API key
+const apiKey = "5982fb75a6e87eeebbd24dcde553bd24"; 
+
+// Try to get GPS location
+function fetchWeatherByLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Fetch weather & forecast
+        getWeather(lat, lon);
+        getForecast(lat, lon);
+      },
+      error => {
+        console.error("Location access denied:", error);
+        // Fallback to Nairobi
+        getWeather(-1.2921, 36.8219);
+        getForecast(-1.2921, 36.8219);
+      }
+    );
+  } else {
+    alert("Geolocation is not supported.");
+    getWeather(-1.2921, 36.8219);
+    getForecast(-1.2921, 36.8219);
+  }
+}
+
+// ==== Fetch Current Weather ====
+async function getWeather(lat, lon) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+    );
+    const data = await response.json();
+
+    const weatherDiv = document.getElementById("weatherInfo");
+
+    const temp = data.main.temp;
+    const desc = data.weather[0].description;
+    const humidity = data.main.humidity;
+    const city = data.name;
+
+    // Farming advice (general)
+    let generalAdvice = "";
+    if (desc.includes("rain")) {
+      generalAdvice = "🌱 Good time for planting, expect rain.";
+    } else if (temp > 30) {
+      generalAdvice = "☀️ Too hot, irrigation recommended.";
+    } else if (humidity < 30) {
+      generalAdvice = "💧 Dry air, crops may need extra care.";
+    } else {
+      generalAdvice = "👍 Conditions are stable for farming.";
+    }
+
+    // Crop-specific advice
+    let cropAdvice = getCropAdvice(temp, desc);
+
+    weatherDiv.innerHTML = `
+      <h4>📍 ${city}</h4>
+      <p>🌡 Temp: ${temp}°C</p>
+      <p>🌤 Condition: ${desc}</p>
+      <p>💧 Humidity: ${humidity}%</p>
+      <div class="advice">${generalAdvice}</div>
+      <div class="crop-advice">${cropAdvice}</div>
+    `;
+  } catch (error) {
+    console.error("Weather fetch failed:", error);
+  }
+}
+
+// ==== Fetch 7-day Forecast ====
+async function getForecast(lat, lon) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`
+    );
+    const data = await response.json();
+
+    const forecastDiv = document.getElementById("forecast");
+    forecastDiv.innerHTML = ""; // Clear old data
+
+    data.daily.slice(0, 7).forEach((day, index) => {
+      const date = new Date(day.dt * 1000);
+      const options = { weekday: "short", month: "short", day: "numeric" };
+      const dayName = date.toLocaleDateString("en-US", options);
+
+      const temp = day.temp.day;
+      const desc = day.weather[0].description;
+
+      // General & crop-specific advice
+      let advice = "";
+      if (desc.includes("rain")) {
+        advice = "🌧 Expect rainfall → Good for planting.";
+      } else if (temp > 30) {
+        advice = "☀️ Hot day → Irrigation needed.";
+      } else if (temp < 15) {
+        advice = "❄️ Cold → Protect seedlings.";
+      } else {
+        advice = "✅ Normal farming conditions.";
+      }
+      // --- Planting Advice Logic ---
+      advice = "⚠️ Monitor conditions.";
+      if (desc.includes("rain") || desc.includes("thunderstorm")) {
+        advice = "🌽 Good for planting maize or beans – rain expected.";
+      } else if (desc.includes("clear") && temp > 28) {
+        advice = "💧 Hot & dry – irrigation needed for crops.";
+      } else if (desc.includes("cloud")) {
+        advice = "🌱 Suitable for vegetables – mild cloud cover.";
+      } else if (humidity > 70 && temp >= 20 && temp <= 26) {
+        advice = "🥬 Good for leafy greens (spinach, sukuma wiki).";
+      }
+
+      forecastHTML += `
+        <li style="margin-bottom:10px;">
+          <strong>${date}</strong> → 
+          🌡 ${temp}°C, 
+          ☁️ ${day.weather[0].description}, 
+          💧 ${humidity}% 
+          <br><em>${advice}</em>
+        </li>
+      `;
+
+      let cropAdvice = getCropAdvice(temp, desc);
+
+      // Build forecast card
+      forecastDiv.innerHTML += `
+        <div class="forecast-day">
+          <h5>${dayName}</h5>
+          <p>🌡 ${temp}°C</p>
+          <p>🌤 ${desc}</p>
+          <small>${advice}</small>
+          <div class="crop-advice">${cropAdvice}</div>
+        </div>
+      `;
+    });
+  } catch (error) {
+    console.error("Forecast fetch failed:", error);
+  }
+}
+
+// ==== Crop-specific Advice ====
+function getCropAdvice(temp, desc) {
   let advice = "";
 
-  if (condition.includes("rain") || humidity > 70) {
-    advice = "🌧️ Good chance of rain – Suitable for planting maize, beans, and vegetables.";
-  } else if (temp > 30 && humidity < 50) {
-    advice = "☀️ Hot & dry – Consider irrigation and drought-resistant crops like sorghum or millet.";
-  } else if (temp >= 20 && temp <= 28) {
-    advice = "🌱 Ideal growing conditions – Great for most crops.";
-  } else if (condition.includes("cloud")) {
-    advice = "☁️ Cloudy – Monitor fields, moderate growth expected.";
+  if (desc.includes("rain")) {
+    advice = "🌽 Maize & beans will thrive → plant now.";
+  } else if (temp > 28) {
+    advice = "🥒 Vegetables may wilt → provide irrigation.";
+  } else if (temp < 18) {
+    advice = "🍅 Tomatoes may slow growth → consider greenhouse.";
   } else {
-    advice = "🌾 Standard conditions – Continue regular farming activities.";
+    advice = "🌾 Balanced weather → good for most crops.";
   }
 
   return advice;
 }
+
+// Run on page load
+fetchWeatherByLocation();
+
