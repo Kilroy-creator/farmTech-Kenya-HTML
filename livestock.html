@@ -8,7 +8,6 @@
 </head>
 <body class="livestock-bg">
   <header>
-    
     <nav class="navbar">
       <div class="logo">🌱 FarmTech</div>
       <ul class="nav-links">
@@ -19,53 +18,69 @@
         <li><a href="market.html">Market</a></li>
         <li><a href="knowledge.html">Knowledge</a></li>
         <li><a href="profile.html">Profile</a></li>
-      </ul></nav>
-      <h1>🐄 Livestock Management</h1>
-      
+      </ul>
+    </nav>
+    <h1>🐄 Livestock Management</h1>
   </header>
 
-  <main>
-   
-    <section>
-      <h2>Add Livestock</h2>
-      <form id="livestockForm">
-        <label>Animal Type:
-          <select id="animalType" required>
-            <option value="">-- Select --</option>
-            <option value="Cow">🐄 Cow</option>
-            <option value="Goat">🐐 Goat</option>
-            <option value="Chicken">🐓 Chicken</option>
-            <option value="Sheep">🐑 Sheep</option>
-            <option value="Pig">🐖 Pig</option>
-            <option value="Other">Other</option>
-          </select>
-        </label><br><br>
+  <main class="livestock-main">
+    <!-- Forms side by side -->
+    <div class="forms-container">
+      <!-- Add Livestock -->
+      <section class="small-card">
+        <h2>Add Livestock</h2>
+        <form id="livestockForm">
+          <label>Animal Type:
+            <select id="animalType" required>
+              <option value="">-- Select --</option>
+              <option value="Cow">🐄 Cow</option>
+              <option value="Goat">🐐 Goat</option>
+              <option value="Chicken">🐓 Chicken</option>
+              <option value="Sheep">🐑 Sheep</option>
+              <option value="Pig">🐖 Pig</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>Breed: <input type="text" id="animalBreed" required></label>
+          <label>Number: <input type="number" id="animalCount" required></label>
+          <label>Date of Birth/Acquisition: <input type="date" id="animalDOB" required></label>
+          <label>Production Type:
+            <select id="productionType" required>
+              <option value="">-- Select --</option>
+              <option value="Milk">🥛 Milk</option>
+              <option value="Eggs">🥚 Eggs</option>
+              <option value="Meat">🍖 Meat</option>
+              <option value="None">None</option>
+            </select>
+          </label>
+          <label>Daily Production (liters/eggs/kg): 
+            <input type="number" id="animalProduction" min="0">
+          </label>
+          <button type="submit">Save Livestock</button>
+        </form>
+      </section>
 
-        <label>Breed: <input type="text" id="animalBreed" required></label><br><br>
-        <label>Number: <input type="number" id="animalCount" required></label><br><br>
-        <label>Average Age (months): <input type="number" id="animalAge" required></label><br><br>
+      <!-- Vaccine/Treatment -->
+      <section class="small-card">
+        <h2>Add Vaccine / Treatment</h2>
+        <form id="vaccineForm">
+          <label>Animal:
+            <select id="animalSelect" required>
+              <option value="">-- Select Animal --</option>
+            </select>
+          </label>
+          <label>Name: <input type="text" id="vaccineName" required></label>
+          <label>Date Given: <input type="date" id="vaccineDate" required></label>
+          <label>Next Due: <input type="date" id="nextVaccineDate"></label>
+          <button type="submit">Save Treatment</button>
+        </form>
+      </section>
+    </div> <!-- ✅ close forms container -->
 
-        <label>Production Type:
-          <select id="productionType" required>
-            <option value="">-- Select --</option>
-            <option value="Milk">🥛 Milk</option>
-            <option value="Eggs">🥚 Eggs</option>
-            <option value="Meat">🍖 Meat</option>
-            <option value="None">None</option>
-          </select>
-        </label><br><br>
-
-        <label>Production per Day (liters/eggs/kg): 
-          <input type="number" id="dailyProduction">
-        </label><br><br>
-
-        <button type="submit">Save Livestock</button>
-      </form>
-    </section>
-
-    <section>
+    <!-- Saved Livestock (always below forms) -->
+    <section class="saved-livestock">
       <h2>Saved Livestock</h2>
-      <div id="livestockList">
+      <div id="livestockList" class="livestock-grid">
         <p>No livestock added yet.</p>
       </div>
     </section>

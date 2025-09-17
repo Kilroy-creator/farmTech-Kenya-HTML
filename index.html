@@ -7,20 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-  <style>
-    /* Ensure weather map is visible */
-    #weatherMap {
-      width: 100%;
-      height: 300px;
-      margin-top: 10px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
 
@@ -49,63 +36,70 @@
       <div class="card zoom-in">
         <h2>🌾 Crops</h2>
         <p>Manage your fields and yields.</p>
-        <a href="crops.html">Go to Crops →</a>
+        <button class="btn-link" onclick="location.href='crops.html'">Crops</button>
       </div>
       <div class="card zoom-in">
         <h2>🐄 Livestock</h2>
         <p>Track animals and veterinary care.</p>
-        <a href="livestock.html">Go to Livestock →</a>
+        <button class="btn-link" onclick="location.href='livestock.html'">Livestock</button>
       </div>
       <div class="card zoom-in">
         <h2>💰 Finance</h2>
         <p>Check expenses and loans.</p>
-        <a href="finance.html">Go to Finance →</a>
+        <button class="btn-link" onclick="location.href='finance.html'">Finance</button>
       </div>
       <div class="card zoom-in">
         <h2>🛒 Market</h2>
         <p>Sell produce & buy inputs.</p>
-        <a href="market.html">Go to Market →</a>
+        <button class="btn-link" onclick="location.href='market.html'">Market</button>
       </div>
     </section>
 
-    <!-- Weather -->
-<section class="weather fade-in">
-  <div class="card fade-in">
-    <h2>☀️ Weather Forecast</h2>
-    <h3>🌦 Current Weather</h3>
-    <div id="weatherInfo">⏳ Detecting your location...</div>
+    <!-- Weather + Chat side by side -->
+    <section class="grid-two fade-in">
 
-    <h4 style="margin-top:15px;">
-      <button id="forecastBtn">📅 Show 5-Day Forecast</button>
-    </h4>
+      <!-- Weather -->
+      <div class="card weather">
+        <h2>☀️ Weather Forecast</h2>
+        <h3>🌦 Current Weather</h3>
+        <div id="weatherInfo">⏳ Detecting your location...</div>
 
-    <!-- Hidden by default -->
-    <div id="forecast" style="display:none;">⏳ Loading forecast...</div>
-  </div>
-</section>
+        <button id="forecastBtn" class="btn">📅 Show 5-Day Forecast</button>
 
-
-    <!-- Chat -->
-    <section class="chat fade-in">
-      <h2>💬 Farmer Feedback & Chat</h2>
-      <div class="chat-box" id="chatBox">
-        <p><em>Farmer John:</em> My maize is growing well after using new fertilizer!</p>
-        <p><em>Farmer Amina:</em> Expect rains next week, prepare your fields.</p>
+        <!-- Hidden by default -->
+        <div id="forecast" class="forecast-box" style="display:none;">⏳ Loading forecast...</div>
       </div>
-      <form id="chatForm">
-        <input type="text" id="chatInput" placeholder="Type your message..." required>
-        <button type="submit">Send</button>
-      </form>
+
+      <!-- Chat -->
+      <div class="card chat">
+        <h2>💬 Farmer Chat</h2>
+        <div class="chat-box" id="chatBox">
+          <p><em>Farmer John:</em> My maize is growing well after using new fertilizer!</p>
+          <p><em>Farmer Amina:</em> Expect rains next week, prepare your fields.</p>
+        </div>
+        <form class="chat-form" id="chatForm">
+          <input 
+            type="text" 
+            id="chatInput" 
+            placeholder="Type your message..." 
+            required
+          >
+          <button type="submit">Send</button>
+        </form>
+      </div>
+
     </section>
+
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 FarmTech Kenya</p>
   </footer>
 
-  <!-- Scripts: Order is important -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/weather.js"></script> <!-- ✅ moved into js/ folder -->
+  <script src="js/weather.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/knowledge.js"></script>

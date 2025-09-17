@@ -5,7 +5,7 @@ const apiKey = "5982fb75a6e87eeebbd24dcde553bd24";
 
 let userLat, userLon;
 
-// Detect farmer’s location
+// ==== Detect farmer’s location & attach forecast button ====
 function fetchWeatherByLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -16,29 +16,35 @@ function fetchWeatherByLocation() {
         // Fetch current weather on load
         getWeather(userLat, userLon);
 
-        // Attach forecast button
+        // Attach forecast toggle
         const btn = document.getElementById("forecastBtn");
         if (btn) {
           btn.addEventListener("click", () => {
-            // Show the forecast section
-            document.getElementById("forecast").style.display = "block";
-            getForecast(userLat, userLon);
+            const forecastBox = document.getElementById("forecast");
+
+            // Toggle display
+            const isHidden =
+              forecastBox.style.display === "none" ||
+              forecastBox.style.display === "";
+            if (isHidden) {
+              forecastBox.style.display = "grid";
+              btn.textContent = "❌ Hide Forecast";
+              getForecast(userLat, userLon); // fetch when showing
+            } else {
+              forecastBox.style.display = "none";
+              btn.textContent = "📅 Show 5-Day Forecast";
+            }
           });
         }
       },
       (error) => {
         console.error("Location access denied:", error);
-        // Fallback to Nairobi
+        // fallback Nairobi
         userLat = -1.2921;
         userLon = 36.8219;
         getWeather(userLat, userLon);
       }
     );
-  } else {
-    alert("Geolocation not supported.");
-    userLat = -1.2921;
-    userLon = 36.8219;
-    getWeather(userLat, userLon);
   }
 }
 
@@ -88,7 +94,7 @@ async function getWeather(lat, lon) {
   }
 }
 
-// ==== Fetch 5-day Forecast ====
+// ==== Fetch 5-Day Forecast ====
 async function getForecast(lat, lon) {
   try {
     const response = await fetch(
@@ -114,7 +120,8 @@ async function getForecast(lat, lon) {
     Object.keys(forecastByDay)
       .slice(0, 5) // only 5 days
       .forEach((date) => {
-        const dayData = forecastByDay[date][4] || forecastByDay[date][0]; // midday if possible
+        const dayData =
+          forecastByDay[date][4] || forecastByDay[date][0]; // midday if possible
         const temp = dayData.main.temp;
         const desc = dayData.weather[0].description;
         const humidity = dayData.main.humidity;

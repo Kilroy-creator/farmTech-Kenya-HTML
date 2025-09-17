@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="market-bg">
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">🌱 FarmTech</div>
     <ul class="nav-links">
@@ -20,48 +21,76 @@
   </nav>
 
   <div class="container">
-    <h2>Farmers Market</h2>
-    <h3>🛍️ Your Cart</h3>
-<ul id="cartList"></ul>
-<button id="checkoutBtn">✅ Checkout</button>
+    <h2>🛒 Farmers Market</h2>
 
-<h3>📖 Order History</h3>
-<div id="orderHistory"></div>
+    <!-- Cart + Checkout -->
+    <section class="card-section">
+  <!-- LEFT: Checkout / Cart -->
+  <div class="checkout-column">
+    <div class="checkout-card">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cartList">
+        <li>No items in cart</li>
+      </ul>
 
+      <div class="checkout-summary">
+        <span>Total:</span>
+        <span>KES <strong id="cartTotal">0.00</strong></span>
+      </div>
 
-    <div class="form-section">
-      <h3>Sell Your Product</h3>
-      <form id="sellForm">
-        <input type="text" id="productName" placeholder="Product Name" required>
-        <input type="number" id="productPrice" placeholder="Price (KES)" required>
-        <input type="number" id="productQty" placeholder="Quantity" required>
-        <input type="text" id="productCategory" placeholder="Category (e.g. Grain, Seed)" required>
-        <input type="text" id="productImage" placeholder="Image URL (optional)">
-        <button type="submit">Add Product</button>
-      </form>
+      <div style="margin-top:12px; display:flex; gap:8px;">
+        <button id="checkoutBtn" class="btn-primary">✅ Checkout</button>
+        <button id="clearCartBtn" style="background:#f44336;color:#fff;border:none;padding:10px;border-radius:8px;cursor:pointer;">
+          Clear
+        </button>
+      </div>
     </div>
-    <div class ="form-section">
-      <h3>Buy Inputs</h3>
-      <form id="buyForm">
-        <input type="text" id="searchQuery" placeholder="Search products..." required>
-        <input type="number" id="maxPrice" placeholder="Max Price (KES)">
-        <input type="number" id="minQty" placeholder="Min Quantity">
-        <input type="text" id="categoryFilter" placeholder="Category (e.g. Grain, Seed)">
-        <input type="text" id="productImage" placeholder="Image URL (optional)">
-        
-        
-        <button type="submit">Search</button>
-      </form>
-    </div>
-
-    <h3>Available Products</h3>
-    <div id="productGrid" class="grid"></div>
-
-    <h3>🛍️ Your Cart</h3>
-    <ul id="cartList"></ul>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- RIGHT: Order History -->
+  <div class="orders-column">
+    <div class="orders-card">
+      <h3>📜 Order History</h3>
+      <div id="orderHistory">
+        <p style="color:#666;">No orders yet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Forms -->
+    <div class="form-wrapper">
+      <div class="form-section">
+        <h3>📦 Sell Your Product</h3>
+        <form id="sellForm">
+          <input type="text" id="productName" placeholder="Product Name" required>
+          <input type="number" id="productPrice" placeholder="Price (KES)" required>
+          <input type="number" id="productQty" placeholder="Quantity" required>
+          <input type="text" id="productCategory" placeholder="Category (e.g. Grain, Seed)" required>
+          <input type="text" id="productImage" placeholder="Image URL (optional)">
+          <button type="submit">➕ Add Product</button>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h3>🔎 Buy Inputs</h3>
+        <form id="buyForm">
+          <input type="text" id="searchQuery" placeholder="Search products..." required>
+          <input type="number" id="maxPrice" placeholder="Max Price (KES)">
+          <input type="number" id="minQty" placeholder="Min Quantity">
+          <input type="text" id="categoryFilter" placeholder="Category (e.g. Grain, Seed)">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <section class="card-section">
+      <h2 class="available-products-title">Available Products</h2>
+      <div id="productGrid" class="grid"></div>
+    </section>
+  </div>
+
   <script src="js/market.js"></script>
 </body>
 </html>

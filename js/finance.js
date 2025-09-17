@@ -3,21 +3,21 @@ const EXPENSE_KEY = "farmtech_expenses";
 const INCOME_KEY = "farmtech_income";
 const LOAN_KEY = "farmtech_loans";
 
-// Load data
 let expenses = JSON.parse(localStorage.getItem(EXPENSE_KEY)) || [];
 let incomes = JSON.parse(localStorage.getItem(INCOME_KEY)) || [];
 let loans = JSON.parse(localStorage.getItem(LOAN_KEY)) || [];
 
 const transactionList = document.getElementById("transactionList");
+let financeChart;
 
-// Save
+// Save Data
 function saveData() {
   localStorage.setItem(EXPENSE_KEY, JSON.stringify(expenses));
   localStorage.setItem(INCOME_KEY, JSON.stringify(incomes));
   localStorage.setItem(LOAN_KEY, JSON.stringify(loans));
 }
 
-// Render summary
+// Render Summary
 function renderSummary() {
   const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
   const totalExpenses = expenses.reduce((sum, e) => sum + e.cost, 0);
@@ -30,11 +30,10 @@ function renderSummary() {
   document.getElementById("profit").textContent = `KSh ${profit}`;
 }
 
-// Render transactions
+// Render Transactions
 function renderTransactions() {
   transactionList.innerHTML = "";
-
-  [...expenses, ...incomes, ...loans].forEach((t, index) => {
+  [...expenses, ...incomes, ...loans].forEach((t) => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = `
@@ -46,9 +45,10 @@ function renderTransactions() {
     `;
     card.querySelector(".delete-transaction").addEventListener("click", () => {
       if (confirm("Delete this record?")) {
-        if (t.type === "Expense") expenses.splice(expenses.indexOf(t), 1);
-        else if (t.type === "Income") incomes.splice(incomes.indexOf(t), 1);
-        else loans.splice(loans.indexOf(t), 1);
+        if (t.type === "Expense") expenses = expenses.filter(e => e !== t);
+        else if (t.type === "Income") incomes = incomes.filter(i => i !== t);
+        else loans = loans.filter(l => l !== t);
+
         saveData();
         renderSummary();
         renderTransactions();
@@ -59,11 +59,14 @@ function renderTransactions() {
   });
 }
 
-// Update chart
+// Update Chart
 function updateChart() {
   const ctx = document.getElementById("financeChart").getContext("2d");
-  new Chart(ctx, {
-    type: "line",
+
+  if (financeChart) financeChart.destroy();
+
+  financeChart = new Chart(ctx, {
+    type: "bar",
     data: {
       labels: ["Income", "Expenses", "Loans"],
       datasets: [{
@@ -73,8 +76,14 @@ function updateChart() {
           expenses.reduce((s, e) => s + e.cost, 0),
           loans.reduce((s, l) => s + l.amount, 0)
         ],
-        backgroundColor: ["rgba(75,192,192,0.6)", "rgba(255,99,132,0.6)", "rgba(255,206,86,0.6)"]
+        backgroundColor: ["#28a745", "#dc3545", "#ffc107"]
       }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      }
     }
   });
 }

@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="profile-bg">
-  <nav class="navbar">
+  <!-- Navbar -->
+   <nav class="navbar">
     <div class="logo">🌱 FarmTech</div>
     <ul class="nav-links">
       <li><a href="index.html">Dashboard</a></li>
@@ -14,41 +15,57 @@
       <li><a href="livestock.html">Livestock</a></li>
       <li><a href="finance.html">Finance</a></li>
       <li><a href="market.html">Market</a></li>
-      <li><a href="knowledge.html">Knowledge</a></li>
-      <li><a href="profile.html" class="active">Profile</a></li>
+      <li><a href="knowledge.html" class="active">Knowledge</a></li>
+      <li><a href="profile.html">Profile</a></li>
     </ul>
   </nav>
 
-  <div class="container">
-    <h2>👤 Profile</h2>
+  <!-- Profile Container -->
+  <div class="container profile-container fade-in">
+    <h2>👤 My Profile</h2>
 
-    <div class="card">
+    <!-- Farmer Details -->
+    <div class="card profile-card">
       <h3>Farmer Details</h3>
       <form id="profileForm">
         <input type="text" id="farmerName" placeholder="Full Name" required>
         <input type="email" id="farmerEmail" placeholder="Email" required>
+        <input type="text" id="farmerContact" placeholder="Contact" required>
+        <input type="number" id="farmerAcres" placeholder="Total Acres of Land" required>
         <input type="text" id="farmerLocation" placeholder="Location" required>
-        <button type="submit">Save</button>
+        <button type="submit">💾 Save Profile</button>
       </form>
     </div>
-    
 
-    <div class="card">
+    <!-- Saved Profile Display -->
+    <div class="card profile-card">
+      <h3>📋 Saved Profile</h3>
+      <div id="profileDisplay">
+        <p>No farmer profile saved yet.</p>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="card profile-card">
       <h3>⚙️ Settings</h3>
-      <label>
-        Language:
+      <div class="form-group">
+        <label for="language">🌐 Language:</label>
         <select id="language">
           <option>English</option>
           <option>Kiswahili</option>
         </select>
-      </label>
-      <br>
-      <label>
-        <input type="checkbox" id="notifications"> Enable Notifications
-      </label>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="notifications"> 🔔 Enable Notifications
+        </label>
+      </div>
     </div>
 
-    <button onclick="logout()">🚪 Logout</button>
+    <!-- Logout -->
+    <div class="logout-wrapper">
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </div>
   </div>
 
   <script src="js/profile.js"></script>

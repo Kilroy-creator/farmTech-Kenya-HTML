@@ -1,3 +1,7 @@
+// ==========================
+// Knowledge Hub JS
+// ==========================
+
 // -------- Tabs --------
 document.querySelectorAll(".tab-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -9,7 +13,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   });
 });
 
-// -------- Research (static for now, can fetch API later) --------
+// -------- Research Articles (static) --------
 const articles = [
   { title: "Climate-Smart Agriculture", source: "FAO", link: "#" },
   { title: "New Pest Control Innovations", source: "ILRI", link: "#" },
@@ -24,42 +28,7 @@ articles.forEach(a => {
   articlesDiv.appendChild(card);
 });
 
-// -------- Weather (OpenWeatherMap API) --------
-const API_KEY = "Y80311cfb7c571b51310409abed8d79a5"; // <- replace with your real API key
-
-weatherForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const city = document.getElementById("city").value;
-
-  try {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-    );
-    if (!res.ok) throw new Error("City not found");
-
-    const data = await res.json();
-    const temp = data.main.temp;
-    const condition = data.weather[0].description.toLowerCase();
-    const humidity = data.main.humidity;
-    const wind = data.wind.speed;
-
-    const advice = getFarmingAdvice(temp, condition, humidity);
-
-    weatherInfo.innerHTML = `
-      <h4>${data.name} Weather</h4>
-      <p>🌡️ Temp: ${temp}°C</p>
-      <p>☀️ Condition: ${condition}</p>
-      <p>💧 Humidity: ${humidity}%</p>
-      <p>🌬️ Wind: ${wind} km/h</p>
-      <div class="advice">📌 Advice: ${advice}</div>
-    `;
-  } catch (error) {
-    weatherInfo.innerHTML = `<p style="color:red;">${error.message}</p>`;
-  }
-});
-
-
-// -------- Community Forum (with Categories) --------
+// -------- Community Forum --------
 const FORUM_KEY = "farmtech_forum";
 let posts = JSON.parse(localStorage.getItem(FORUM_KEY)) || [];
 
@@ -114,175 +83,141 @@ window.addReply = function(index) {
   }
 };
 
-// Filter posts by category
 document.getElementById("filterCategory").addEventListener("change", (e) => {
   renderPosts(e.target.value);
 });
 
-// Initial render
+// Initial forum render
 renderPosts();
 
-// ==== Real-time Weather + 7-Day Forecast + Crop-Specific Advice ====
+// -------- Weather & Forecast --------
+const weatherForm = document.getElementById("weatherForm");
+const weatherInfo = document.getElementById("weatherInfo");
+const forecastDiv = document.getElementById("forecast");
 
-// Replace with your OpenWeatherMap API key
-const apiKey = "5982fb75a6e87eeebbd24dcde553bd24"; 
+const API_KEY = "5982fb75a6e87eeebbd24dcde553bd24"; // replace with your valid key
 
-// Try to get GPS location
-function fetchWeatherByLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
+// Form-based city search
+weatherForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const city = document.getElementById("city").value;
+  if (!city) return;
+  const res = await fetchWeatherByCity(city);
+  if (!res) weatherInfo.innerHTML = `<p style="color:red;">City not found</p>`;
+});
 
-        // Fetch weather & forecast
-        getWeather(lat, lon);
-        getForecast(lat, lon);
-      },
-      error => {
-        console.error("Location access denied:", error);
-        // Fallback to Nairobi
-        getWeather(-1.2921, 36.8219);
-        getForecast(-1.2921, 36.8219);
-      }
-    );
-  } else {
-    alert("Geolocation is not supported.");
-    getWeather(-1.2921, 36.8219);
-    getForecast(-1.2921, 36.8219);
-  }
-}
-
-// ==== Fetch Current Weather ====
-async function getWeather(lat, lon) {
+// Fetch by city name
+async function fetchWeatherByCity(city) {
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-    );
-    const data = await response.json();
-
-    const weatherDiv = document.getElementById("weatherInfo");
-
-    const temp = data.main.temp;
-    const desc = data.weather[0].description;
-    const humidity = data.main.humidity;
-    const city = data.name;
-
-    // Farming advice (general)
-    let generalAdvice = "";
-    if (desc.includes("rain")) {
-      generalAdvice = "🌱 Good time for planting, expect rain.";
-    } else if (temp > 30) {
-      generalAdvice = "☀️ Too hot, irrigation recommended.";
-    } else if (humidity < 30) {
-      generalAdvice = "💧 Dry air, crops may need extra care.";
-    } else {
-      generalAdvice = "👍 Conditions are stable for farming.";
-    }
-
-    // Crop-specific advice
-    let cropAdvice = getCropAdvice(temp, desc);
-
-    weatherDiv.innerHTML = `
-      <h4>📍 ${city}</h4>
-      <p>🌡 Temp: ${temp}°C</p>
-      <p>🌤 Condition: ${desc}</p>
-      <p>💧 Humidity: ${humidity}%</p>
-      <div class="advice">${generalAdvice}</div>
-      <div class="crop-advice">${cropAdvice}</div>
-    `;
-  } catch (error) {
-    console.error("Weather fetch failed:", error);
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    updateWeatherDisplay(data);
+    return data;
+  } catch {
+    return null;
   }
 }
 
-// ==== Fetch 7-day Forecast ====
+// Fetch by GPS location
+function fetchWeatherByLocation() {
+  if (!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      getWeatherByCoords(lat, lon);
+    },
+    () => getWeatherByCoords(-1.2921, 36.8219) // fallback Nairobi
+  );
+}
+
+// Main weather fetch by coordinates
+async function getWeatherByCoords(lat, lon) {
+  try {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+    const data = await res.json();
+    updateWeatherDisplay(data);
+    getForecast(lat, lon);
+  } catch (err) { console.error(err); }
+}
+
+// Update weather display + advice
+function updateWeatherDisplay(data) {
+  const temp = data.main.temp;
+  const desc = data.weather[0].description;
+  const humidity = data.main.humidity;
+  const wind = data.wind.speed;
+
+  weatherInfo.innerHTML = `
+    <h4>📍 ${data.name}</h4>
+    <p>🌡 Temp: ${temp}°C</p>
+    <p>🌤 Condition: ${desc}</p>
+    <p>💧 Humidity: ${humidity}%</p>
+    <p>🌬 Wind: ${wind} km/h</p>
+    <div class="advice">${getGeneralAdvice(temp, desc, humidity)}</div>
+    <div class="crop-advice">${getCropAdvice(temp, desc)}</div>
+  `;
+
+  // Update map
+  map.setView([data.coord.lat, data.coord.lon], 6);
+  L.marker([data.coord.lat, data.coord.lon]).addTo(map)
+    .bindPopup(`${data.name}: ${temp}°C, ${desc}`).openPopup();
+}
+
+// General farming advice
+function getGeneralAdvice(temp, desc, humidity) {
+  if (desc.includes("rain")) return "🌱 Good time for planting, expect rain.";
+  if (temp > 30) return "☀️ Too hot, irrigation recommended.";
+  if (humidity < 30) return "💧 Dry air, crops may need extra care.";
+  return "👍 Conditions are stable for farming.";
+}
+
+// Crop-specific advice
+function getCropAdvice(temp, desc) {
+  if (desc.includes("rain")) return "🌽 Maize & beans will thrive → plant now.";
+  if (temp > 28) return "🥒 Vegetables may wilt → provide irrigation.";
+  if (temp < 18) return "🍅 Tomatoes may slow growth → consider greenhouse.";
+  return "🌾 Balanced weather → good for most crops.";
+}
+
+// 7-day forecast
 async function getForecast(lat, lon) {
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`
-    );
-    const data = await response.json();
-
-    const forecastDiv = document.getElementById("forecast");
-    forecastDiv.innerHTML = ""; // Clear old data
-
-    data.daily.slice(0, 7).forEach((day, index) => {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${API_KEY}&units=metric`);
+    const data = await res.json();
+    forecastDiv.innerHTML = "";
+    data.daily.slice(0,7).forEach(day => {
       const date = new Date(day.dt * 1000);
-      const options = { weekday: "short", month: "short", day: "numeric" };
+      const options = { weekday:"short", month:"short", day:"numeric" };
       const dayName = date.toLocaleDateString("en-US", options);
-
       const temp = day.temp.day;
       const desc = day.weather[0].description;
-
-      // General & crop-specific advice
-      let advice = "";
-      if (desc.includes("rain")) {
-        advice = "🌧 Expect rainfall → Good for planting.";
-      } else if (temp > 30) {
-        advice = "☀️ Hot day → Irrigation needed.";
-      } else if (temp < 15) {
-        advice = "❄️ Cold → Protect seedlings.";
-      } else {
-        advice = "✅ Normal farming conditions.";
-      }
-      // --- Planting Advice Logic ---
-      advice = "⚠️ Monitor conditions.";
-      if (desc.includes("rain") || desc.includes("thunderstorm")) {
-        advice = "🌽 Good for planting maize or beans – rain expected.";
-      } else if (desc.includes("clear") && temp > 28) {
-        advice = "💧 Hot & dry – irrigation needed for crops.";
-      } else if (desc.includes("cloud")) {
-        advice = "🌱 Suitable for vegetables – mild cloud cover.";
-      } else if (humidity > 70 && temp >= 20 && temp <= 26) {
-        advice = "🥬 Good for leafy greens (spinach, sukuma wiki).";
-      }
-
-      forecastHTML += `
-        <li style="margin-bottom:10px;">
-          <strong>${date}</strong> → 
-          🌡 ${temp}°C, 
-          ☁️ ${day.weather[0].description}, 
-          💧 ${humidity}% 
-          <br><em>${advice}</em>
-        </li>
-      `;
-
-      let cropAdvice = getCropAdvice(temp, desc);
-
-      // Build forecast card
+      const advice = getForecastAdvice(temp, desc);
       forecastDiv.innerHTML += `
         <div class="forecast-day">
           <h5>${dayName}</h5>
           <p>🌡 ${temp}°C</p>
           <p>🌤 ${desc}</p>
           <small>${advice}</small>
-          <div class="crop-advice">${cropAdvice}</div>
         </div>
       `;
     });
-  } catch (error) {
-    console.error("Forecast fetch failed:", error);
-  }
+  } catch(err){ console.error(err); }
 }
 
-// ==== Crop-specific Advice ====
-function getCropAdvice(temp, desc) {
-  let advice = "";
-
-  if (desc.includes("rain")) {
-    advice = "🌽 Maize & beans will thrive → plant now.";
-  } else if (temp > 28) {
-    advice = "🥒 Vegetables may wilt → provide irrigation.";
-  } else if (temp < 18) {
-    advice = "🍅 Tomatoes may slow growth → consider greenhouse.";
-  } else {
-    advice = "🌾 Balanced weather → good for most crops.";
-  }
-
-  return advice;
+function getForecastAdvice(temp, desc) {
+  if (desc.includes("rain") || desc.includes("thunderstorm")) return "🌽 Good for maize/beans – rain expected.";
+  if (desc.includes("clear") && temp > 28) return "💧 Hot & dry – irrigation needed.";
+  if (desc.includes("cloud")) return "🌱 Suitable for vegetables – mild cloud cover.";
+  return "⚠️ Monitor conditions.";
 }
 
-// Run on page load
+// -------- Leaflet Map --------
+const map = L.map("map").setView([0, 37], 5);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors"
+}).addTo(map);
+
+// Run on load
 fetchWeatherByLocation();
-

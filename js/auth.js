@@ -1,8 +1,8 @@
 // AUTHENTICATION SYSTEM
 
-// Login handler
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
+
   if (loginForm) {
     loginForm.addEventListener("submit", function(e) {
       e.preventDefault();
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Protect pages (except login)
+  // Protect all pages except login
   if (!window.location.href.includes("login.html")) {
     const farmer = JSON.parse(localStorage.getItem("loggedInFarmer"));
     if (!farmer || !farmer.loggedIn) {
       window.location.href = "login.html"; // force login
     } else {
-      // Personalize UI
+      // Personalize UI (show farmer name in navbar if exists)
       const navBar = document.querySelector("header nav");
       if (navBar) {
         const userSpan = document.createElement("span");

@@ -25,7 +25,7 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero" style="background: url('images/finance-bg.jpg') center/cover;">
+  <section class="hero">
     <div class="hero-text">
       <h1>💰 Finance Management</h1>
       <p>Track expenses, income, loans & profits</p>
@@ -36,14 +36,14 @@
   <section class="summary">
     <h2>📊 Finance Summary</h2>
     <div class="summary-cards">
-      <div class="card"><h3>Total Income</h3><p id="totalIncome">KSh 0</p></div>
-      <div class="card"><h3>Total Expenses</h3><p id="totalExpenses">KSh 0</p></div>
-      <div class="card"><h3>Profit</h3><p id="profit">KSh 0</p></div>
-      <div class="card"><h3>Loan Balance</h3><p id="loanBalance">KSh 0</p></div>
+      <div class="card"><span class="icon">💰</span><h3>Total Income</h3><p id="totalIncome">KSh 0</p></div>
+      <div class="card"><span class="icon">📉</span><h3>Total Expenses</h3><p id="totalExpenses">KSh 0</p></div>
+      <div class="card"><span class="icon">📈</span><h3>Profit</h3><p id="profit">KSh 0</p></div>
+      <div class="card"><span class="icon">🏦</span><h3>Loan Balance</h3><p id="loanBalance">KSh 0</p></div>
     </div>
   </section>
-
-  <!-- Add Expense -->
+<div class="form-wrapper">
+<!-- Add Expense -->
   <section class="form-section">
     <h2>➖ Record Expense</h2>
     <form id="expenseForm">
@@ -84,6 +84,7 @@
       <button type="submit">Add Loan</button>
     </form>
   </section>
+  </div>
 
   <!-- Transaction History -->
   <section class="card-section">
@@ -94,7 +95,7 @@
   <!-- Chart -->
   <section class="chart-section">
     <h2>📈 Income vs Expenses</h2>
-    <canvas id="financeChart" width="400" height="200"></canvas>
+    <canvas id="financeChart"></canvas>
   </section>
 
   <script src="js/finance.js"></script>
